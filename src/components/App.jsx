@@ -2,10 +2,14 @@
 import { Component } from "react";
 import { fetchPictures } from "services/gallaryAPI";
 import { GlobalStyle } from "./GlobalStyle";
-import { ImageGallery } from "./ImageGallery/ImageGallery";
+
 import { Layout } from "./Layout/Layout";
+
+import { ImageGallery } from "./ImageGallery/ImageGallery";
 import { Modal } from "./Modal/Modal";
 import { Searchbar } from "./Searchbar/Searchbar";
+import { Loader } from './Loader/Loader';
+import { Button } from './Button/Button';
 
 export class App extends Component {
   state = {
@@ -34,6 +38,13 @@ getLargeImg = imgUrl => {
   this.toggleModal()
 };
 
+handleLoadMore =() => {
+  this.setState(prevState => ({
+    page: prevState.page + 1,
+  }))
+}
+
+
 componentDidUpdate(_, prevState) {
   const {page, query} = this.state;
 
@@ -53,13 +64,11 @@ componentDidUpdate(_, prevState) {
 
 render(){
   const {pictures,
-    // status,
+    status,
     showModal,
-    // page,
-    // query,
     tags,
     largeImageUrl,
-    // loadMore
+    loadMore
   } = this.state
   return (
     <Layout>
@@ -69,6 +78,8 @@ render(){
   <Modal url={largeImageUrl} alt={tags} onClose={this.toggleModal} />
 )}
     <ImageGallery pictures={pictures} onClick={this.getLargeImg}/>  
+    {status === 'loading' && <Loader />}
+        {loadMore === 0 && <Button onClick={this.handleLoadMore} />}
     </Layout>
   );
 };

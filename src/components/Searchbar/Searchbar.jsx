@@ -7,6 +7,7 @@ import {
   SearchFormBtnLabel,
   SearchFormInput,
 } from './Searchbar.styled';
+import { BsSearch } from 'react-icons/bs';
 
 export class Searchbar extends Component {
 
@@ -37,7 +38,7 @@ return (
 
   <SearchbarContainer>
   <SearchForm onSubmit={this.handleSubmit}>
-    <SearchFormBtn type="submit">
+    <SearchFormBtn type="submit"> <BsSearch/>
       <SearchFormBtnLabel>Search</SearchFormBtnLabel>
     </SearchFormBtn>
 

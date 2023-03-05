@@ -1,5 +1,11 @@
 import styled from "styled-components";
 
+export const LoadBtnContainer = styled.div`
+    margin: 0 auto;
+    width: 200px;
+    margin-top: 16px;
+`
+
 export const LoadButton = styled.button`
   padding: 8px 16px;
   border-radius: 2px;
